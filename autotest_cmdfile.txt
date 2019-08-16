@@ -1,0 +1,38 @@
+version
+tempread all
+# --- Haywards DIAG command ---
+#linespeed <mode> <port> <pattern> <size> <numpkt> <speed> <isSfp> <duration> 
+#linespeed extp 1-2 FF 64 8 1000 0 10
+
+# --- Seadart DIAG command ---
+#linespeed extp 1-2 FF 64 100 10
+#BCM.0> setreg xlport_mac_rsv_mask 0x48
+#BCM.0> setreg clport_mac_rsv_mask 0x48      
+BCM.0> epdm port xe12-xe23 sp=10000 line_intf=11 sys_intf=15
+BCM.0> exit
+#tempread all
+#     check SSD status
+#-------------------------------------
+root@localhost:~# dmesg | grep sd
+#root@localhost:~# ls / dev/sd* -al
+root@localhost:~# top -b -o +%CPU | head -10
+root@localhost:~# exit
+#------------------------------------
+tempread all
+#sfpIoDetection disable
+#fiberLbMode extp
+#
+#linespeed extp 1-2 FF 64 100 10
+#linespeed extp 1-2 FF 64 100 10
+#minicycle extp 27-28 ff 64 100 10
+#minicycle extp 27-28 ff 64 100 10
+#version
+
+#epdm_cli pre-emphasis set 13 0x0f0000092208 lane=0 if=line
+#epdm_cli pre-emphasis set 14 0x0f0000092208 lane=1 if=line
+#epdm_cli pre-emphasis set 15 0x0f0000092308 lane=2 if=line
+#epdm_cli pre-emphasis set 16 0x0f0000092308 lane=3 if=line
+#
+#minicycle extp 27-28 ff 64 50 10
+#minicycle extp 27-28 ff 64 100 10
+#
